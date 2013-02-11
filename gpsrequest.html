@@ -1,0 +1,56 @@
+<html>
+<!DOCTYPE HTML>
+<head>
+
+	<title>GPS-request</title>
+<script type="text/javascript">
+<!--
+var is_activated=0,watchid
+function gibposition(position) {
+document.getElementById("gpslatitude").value=position.coords.latitude
+document.getElementById("gpslongitude").value=position.coords.longitude
+
+
+}
+
+function gpsreq(){
+navigator.geolocation.getCurrentPosition(gibposition);
+
+}
+
+function watchreq()
+{
+if (is_activated==0){
+watchid=navigator.geolocation.watchPosition(gibposition);
+document.getElementById("willi").value="stop GPS-watch"
+is_activated=1
+} else
+{
+navigator.geolocation.clearWatch(watchid);
+document.getElementById("willi").value="start GPS-watch"
+is_activated=0
+
+}
+
+
+
+}
+
+
+
+
+//-->
+</script>
+
+</head>
+<body>
+
+
+livegpsrequest: latitude <input type="text" id="gpslatitude"/> longitude <input type="text" id="gpslongitude"/>
+<input type="button" id="willi" onClick='watchreq()' value="start GPS-watch" />
+<input type="button" onClick='gpsreq()' value="onetime GPS-request" />
+
+
+
+</body>
+</html> 
