@@ -1,64 +1,76 @@
 <html>
-<!DOCTYPE HTML>
-<head>
+	<head>
+		<title>GPS-request</title>
+		
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
 
-	<title>GPS-request</title>
-<script type="text/javascript">
-<!--
-var is_activated=0,watchid
-function gibposition(position) {
-document.getElementById("gpslatitude").value=position.coords.latitude
-document.getElementById("gpslongitude").value=position.coords.longitude
-
-
-}
-
-function gpsreq(){
-navigator.geolocation.getCurrentPosition(gibposition);
-
-}
-
-function watchreq()
-{
-if (is_activated==0){
-watchid=navigator.geolocation.watchPosition(gibposition);
-document.getElementById("willi").value="stop GPS-watch"
-is_activated=1
-} else
-	{
-	navigator.geolocation.clearWatch(watchid);
-	document.getElementById("willi").value="start GPS-watch"
-	is_activated=0
+		
+		<link rel="stylesheet" type="text/css" href="http://snippetspace.com/iwebkit/demo/css/style.css">
+		
+		<script type="text/javascript">
+		
+			var is_activated = 0,watchid
+			function gibposition(position) {
+			document.getElementById("gpslatitude").value = position.coords.latitude
+			document.getElementById("gpslongitude").value = position.coords.longitude
+			
+			
+			}
+			
+			function reset() {
+			document.getElementById("gpslatitude").value = ""
+			document.getElementById("gpslongitude").value = ""
+			
+			
+			}			
+			
+			function gpsreq()
+			{
+				navigator.geolocation.getCurrentPosition(gibposition);
+			}
+			
+			function watchreq()
+			{
+				if (is_activated == 0){
+					watchid = navigator.geolocation.watchPosition(gibposition);
+					document.getElementById("willi").value = "stop GPS-watch"
+					is_activated = 1
+				}
+				else {
+					navigator.geolocation.clearWatch(watchid);
+					document.getElementById("willi").value = "start GPS-watch"
+					is_activated = 0
+				}
+			}
+		</script>
+	</head>
 	
-	}
+	<body>
+	<div id="content">
+		<ul class="pageitem">
+			
+			<li class="smallfield"><span class="name">GPS latitude</span>
+				<input type="text" id="gpslatitude" readonly />
+			</li>
 
-}
-
-function reset()
-{
-document.getElementById("gpslatitude").value=""
-document.getElementById("gpslongitude").value=""
-
-
-
-
-
-}
-
-
-
-//-->
-</script>
-
-</head>
-<body>
-
-
-livegpsrequest: latitude <input type="text" id="gpslatitude" readonly> longitude <input type="text" id="gpslongitude" readonly>
-<input type="button" id="willi" onClick='watchreq()' value="start GPS-watch" >
-<input type="button" onClick='gpsreq()' value="onetime GPS-request" >
-<input type="button" onClick='reset()' value="Reset" >
-
-
-</body>
+			<li class="smallfield"><span class="name" >GPS longitude</span>
+				<input type="text" id="gpslongitude"  readonly />
+			</li>
+		</ul>
+		
+		<ul class="pageitem">
+			<li class="button">
+				<input type="button" id="willi" onClick='watchreq()' value="start GPS-watch" readonly />
+			</li>
+			<li class="button">
+				<input type="button" onClick='gpsreq()' value="onetime GPS-request"/>
+			</li>
+			<li class="button">
+				<input type="button" onClick='reset()' value="reset"/>
+			</li>
+		</ul>
+	</div>
+	</body>
 </html> 
+
